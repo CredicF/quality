@@ -72,3 +72,15 @@
 - 已通过4项测试：HTML脚本样式剔除、Markdown与非法文件拒绝、生成的DOCX真实解析、文档登记/任务引用/重启持久化。旧版DOC接入解析器，尚无真实DOC样本验收。
 - 修复轮询反复重绘详情导致证据折叠的问题。原型文件及已有任务保留。
 - 真实DeepSeek调用和浏览器交互尚未自动验收。
+
+## 2026-11-02 Sites公开验收部署
+
+- 网址：https://design-quality-review-credic.dewy-sage-9363.chatgpt.site
+- 用户明确要求任何拿到链接的人可以访问；Sites公开权限已设置。
+- project_id：appgprj_6ae827624ed88191a25ea95a19fc2065
+- 版本1，部署 appgdep_6ae829d52bd88191a01129750d25f540，平台返回 succeeded。
+- 独立云端仓库 sites/quality-review，main 分支，源码提交 0a396a08e8b4ea7b9c12fa03a9476610503332ab；不要重新创建站点。
+- 云端改用 D1 持久化，匿名访客使用 HttpOnly Secure cookie 隔离记录。清除cookie或换浏览器后不显示原记录。DeepSeek密钥通过Sites机密环境变量保存。
+- 云端检测请求等待模型完成再响应，页面显示分析中；不同于本地独立后台执行。浏览器关闭期间不保证任务完成，不宣称具备持久化任务队列。
+- 已验证线上页面200、密钥配置状态、文档登记及同会话查询。真实模型调用与浏览器完整交互尚未验证。
+- 已成功使用构建产物发布。后续 npm 依赖安装因 registry.npmjs.org 的 selderee 下载超时失败，云端源码目录 node_modules 需要在下次构建前恢复；不要重用残缺依赖构建。
