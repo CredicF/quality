@@ -61,3 +61,14 @@
 ### 验证结果
 
 `npm test` 已通过：输入校验、缺少密钥失败状态、输入快照保存、服务重启持久化。JavaScript 语法检查通过。尚未执行真实 DeepSeek 调用与浏览器视觉验收。已提交首版代码，分支 feature/design-quality-detection。
+
+## 2026-11-02 验收调整：文档驱动发起
+
+本节取代早期“文本导入、不支持Word”的限制说明。
+
+- 发起窗口仅需上传文件或下拉选择系统文档；删除项目、名称、版本、创建人、正文、关联资料手填项。
+- 新增 documents.mjs：DOCX（mammoth）、DOC（word-extractor）、HTML（html-to-text）、MD/TXT 解析，10MB文件/50000字正文限制，空文档及解析失败明确提示。
+- 新增持久化文档记录及 GET/POST /api/documents；任务接受 documentId，自动从记录读取元数据及关联资料并保留独立快照。接口契约见 README。
+- 已通过4项测试：HTML脚本样式剔除、Markdown与非法文件拒绝、生成的DOCX真实解析、文档登记/任务引用/重启持久化。旧版DOC接入解析器，尚无真实DOC样本验收。
+- 修复轮询反复重绘详情导致证据折叠的问题。原型文件及已有任务保留。
+- 真实DeepSeek调用和浏览器交互尚未自动验收。
